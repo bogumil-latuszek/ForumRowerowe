@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ForumRowerowe.Models;
 
 namespace ForumRowerowe.Data
 {
@@ -12,5 +13,6 @@ namespace ForumRowerowe.Data
             : base(options)
         {
         }
+        public DbSet<Post> Posts { get; set; }
     }
 }
