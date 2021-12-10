@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ForumRowerowe.Models
 {
@@ -12,6 +13,8 @@ namespace ForumRowerowe.Models
         [MinLength(length: 1, ErrorMessage = "Twoja wiadomość jest za krótka")]
         [Display(Name ="Twój post")]
         public string Content { get; set; }
+        [ForeignKey("Thread")]
+        public int ThreadID { get; set; }
 
 
     }
