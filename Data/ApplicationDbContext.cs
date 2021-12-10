@@ -14,5 +14,8 @@ namespace ForumRowerowe.Data
         {
         }
         public DbSet<Post> Posts { get; set; }
+
+        public DbSet<Thread> Threads { get; set; }
+
     }
 }

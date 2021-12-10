@@ -4,14 +4,16 @@ using ForumRowerowe.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ForumRowerowe.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211210085131_add thread table in 1to2 relation with post")]
+    partial class addthreadtablein1to2relationwithpost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -35,25 +37,7 @@ namespace ForumRowerowe.Data.Migrations
 
                     b.HasKey("PostID");
 
-                    b.HasIndex("ThreadID");
-
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("ForumRowerowe.Models.Thread", b =>
-                {
-                    b.Property<int>("ThreadID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
-                    b.HasKey("ThreadID");
-
-                    b.ToTable("Threads");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -254,15 +238,6 @@ namespace ForumRowerowe.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("ForumRowerowe.Models.Post", b =>
-                {
-                    b.HasOne("ForumRowerowe.Models.Thread", "Thread")
-                        .WithMany("Posts")
-                        .HasForeignKey("ThreadID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

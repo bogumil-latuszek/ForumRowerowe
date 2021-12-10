@@ -15,6 +15,11 @@ namespace ForumRowerowe.Models
         [MinLength(length: 1, ErrorMessage = "za krótki tytuł")]
         [Display(Name = "Tytuł")]
         public string Title { get; set; }
+        public ICollection<Post> Posts { get; set; }
 
+        public Thread()
+        {
+            Posts = new HashSet<Post>();
+        }  
     }
 }

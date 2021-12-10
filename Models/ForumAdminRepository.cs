@@ -19,6 +19,8 @@ namespace ForumRowerowe.Models
         IList<Post> FindAll();
 
         IList<Post> FindPage(int page, int size);
+
+        void AssignPostToThread(int postID, int threadID);
     }
 
     public class ForumAdminRepository : IForumCrudRepository
@@ -55,6 +57,15 @@ namespace ForumRowerowe.Models
         public IList<Post> FindPage(int page, int size)
         {
             return (from p in _context.Posts select p).OrderBy(p => p.PostID).Skip((page - 1)* size).Take(size).ToList();
+        }
+
+        public void AssignPostToThread(int postID, int threadID )
+        {
+            var post_temp = _context.Posts.Find(postID);
+            var thread_temp = _context.Threads.Find(threadID);
+            thread_temp.Posts.Add(post_temp);
+            _context.Update(thread_temp);
+            _context.SaveChanges();
         }
     }
 

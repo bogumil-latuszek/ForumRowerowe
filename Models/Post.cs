@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +16,9 @@ namespace ForumRowerowe.Models
         public string Content { get; set; }
         [ForeignKey("Thread")]
         public int ThreadID { get; set; }
+
+        public Thread Thread { get; set; } //navigation property
+
 
 
     }
